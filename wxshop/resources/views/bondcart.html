@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <title>填写银行卡信息</title>
+    <meta content="app-id=984819816" name="apple-itunes-app" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no, maximum-scale=1.0" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <link href="css/comm.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/card.css">
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" href="dist/css/LArea.css">
+    <!-- SUI mobile -->
+   
+    
+</head>
+<body>
+    
+<!--触屏版内页头部-->
+<div class="m-block-header" id="div-header">
+    <strong id="m-title">填写银行卡信息</strong>
+    <a href="javascript:history.back();" class="m-back-arrow"><i class="m-public-icon"></i></a>
+    <a href="/" class="m-index-icon"><i class="m-public-icon"></i></a>
+</div>
+<div class="bondwrapper">
+	<p>请绑定持卡人本人的银行卡</p>
+	<div class="cardinfo">
+		<ul>
+			<li><em>卡类型</em><input type="text" id="demo1"  class="mr14" placeholder="请选择卡类型" readonly=""><input id="value1" type="hidden"/></li>
+			<li><em>持卡人</em><input type="text" class="mr14" placeholder="请填写持卡人姓名"></li>
+			<li><em>卡号</em><input type="text" class="mr14 cardnumber" placeholder="请输入您的银行卡号" maxlength="23"></li>
+			<li><em>确认卡号</em><input type="text" class="mr14 cardnumber" placeholder="请再次输入银行卡号" maxlength="23"></li>
+			<li><em>开户地</em><input class="mr14" type="text" id="demo2" placeholder="请选择开户行城市"><input id="value2" type="hidden" /></li>
+			<li><em>手机号</em><input type="number" class="mr14" id="tel" placeholder="请输入银行预留手机号"></li>
+		</ul>	
+	</div>
+	<div class="protocal clearfix">
+		<i class="gou"></i>
+		<p>我已阅读并同意《用户协议》</p>
+		
+	</div>
+	<div class="next">
+		<span>下一步</span>
+	</div>
+
+</div>
+
+<script src="js/jquery-1.11.2.min.js"></script>
+<script src="dist/js/LArea.js"></script>
+<script src="dist/js/LAreaData1.js"></script>
+<script src="dist/js/LAreaData11.js"></script>
+<script src="dist/js/LAreaData2.js"></script>
+<script src="js/all.js"></script>
+<script src="layui/layui.js"></script>
+
+<script>
+	
+	var area = new LArea();
+	area.init({
+	    'trigger': '#demo1',//触发选择控件的文本框，同时选择完毕后name属性输出到该位置
+	    'valueTo':'#value1',//选择完毕后id属性输出到该位置
+	    'keys':{id:'id',name:'name'},//绑定数据源相关字段 id对应valueTo的value属性输出 name对应trigger的value属性输出
+	    'type':1,//数据源类型
+	    'data':LAreaData1//数据源
+	});
+
+	var area1 = new LArea();
+	area1.init({
+	    'trigger': '#demo2',//触发选择控件的文本框，同时选择完毕后name属性输出到该位置
+	    'valueTo':'#value2',//选择完毕后id属性输出到该位置
+	    'keys':{id:'id',name:'name'},//绑定数据源相关字段 id对应valueTo的value属性输出 name对应trigger的value属性输出
+	    'type':1,//数据源类型
+	    'data':LAreaDataa//数据源
+	});
+
+
+	// 卡号位数限定
+	 $(function() {
+
+      $('.cardnumber').on('keyup', function(e) {
+       //只对输入数字时进行处理
+        if((e.which >= 48 && e.which <= 57) ||
+            (e.which >= 96 && e.which <= 105 )){
+          //获取当前光标的位置
+          var caret = this.selectionStart
+          //获取当前的value
+          var value = this.value
+          //从左边沿到坐标之间的空格数
+          var sp = (value.slice(0, caret).match(/\s/g) || []).length
+          //去掉所有空格
+          var nospace = value.replace(/\s/g, '')
+          //重新插入空格
+          var curVal = this.value = nospace.replace(/(\d{4})/g, "$1 ").trim()
+          //从左边沿到原坐标之间的空格数
+          var curSp = (curVal.slice(0, caret).match(/\s/g) || []).length
+         //修正光标位置
+         this.selectionEnd = this.selectionStart = caret + curSp - sp
+        
+        }
+      })
+    })
+
+	 // 手机号验证
+	 function telphone(){
+	 	$('#tel').blur(function(){
+	 		reg=/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[06-8])\d{8}$/;//验证手机正则(输入前7位至11位) 
+	 		if(!reg.test($("#tel").val()))  
+            {   
+                layer.msg('您输入的手机号不合法!'); 
+            }  
+	 	})
+	 }
+	 telphone();
+
+	$('#demo1').click(function(){
+	 	if($('.area_city .tooth').text()==""){
+	 		$('.area_city').parent().css('display','none');
+		}
+		if($('.area_county .tooth').text()==""){
+	 		$('.area_county').parent().css('display','none');
+		}
+	})
+	 
+	
+</script>
+</body>
+</html>

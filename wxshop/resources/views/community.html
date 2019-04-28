@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta content="text/html; charset=utf-8" http-equiv="Content-Type" /><title>找回密码</title>
+<meta content="app-id=984819816" name="apple-itunes-app" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no, maximum-scale=1.0" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<link href="css/comm.css" rel="stylesheet" type="text/css" />
+<link href="css/mywallet.css" rel="stylesheet" type="text/css" />
+<link href="css/community.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery-1.8.3.min.js"></script>
+</head>
+<body>
+    
+<!--触屏版内页头部-->
+<div class="m-block-header" id="div-header">
+    <strong id="m-title">社区</strong>
+    <a href="javascript:history.back();" class="m-back-arrow"><i class="m-public-icon"></i></a>
+    <a href="/" class="m-index-icon"><i class="m-public-icon"></i></a>
+</div>
+
+
+<div class="wrapper">
+    <div class="contact">
+        <div class="contactwrapp">
+            <aside class="tel"> 
+                <div class="telwrrap clearfix">
+                    <a href=""><img src="images/contact.png" alt=""></a>
+                    <div class="telcon">
+                        <h4>唯一官方客服电话</h4>
+                        <span>400-666-2110</span><br>
+                        <span class="time">上班时间&nbsp; 9:00-5:00</span>
+                    </div>
+                </div>
+            </aside>
+            <aside class="qq">
+                <div class="telwrrap">
+                    <a href=""><img src="images/youxiang.png" alt=""></a>
+                    <div class="qqcon">
+                        <h4>唯一官方邮箱</h4>
+                        <span>service@666crg.com</span>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+    <div class="wallet-con">
+        <div class="w-item">
+             <ul class="w-content clearfix">
+                <li>
+                    <a href="">666潮人购北京1群（未满）</a>
+                    <s class="fr"></s>
+                    <span class="fr">626848146</span>
+                </li>
+                <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=ee0b8d0a464340e48ac7617bd8789f8e2a1e14503019b1a9876773b81645bb0a"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="小妞们\(^o^)/~" title="小妞们\(^o^)/~"></a>
+
+                    
+            </ul>
+            
+        </div>
+    </div>
+
+</div>
+
+<script src="layui/layui.js"></script> 
+<script>
+    layui.use(['layer', 'laypage', 'element'], function(){
+  var layer = layui.layer
+  ,laypage = layui.laypage
+  ,element = layui.element(); 
+ })
+</script>
+<script>
+        var deviceWidth = document.documentElement.clientWidth;
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
+        // if(deviceWidth > 750) deviceWidth = 750;
+        document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+    </script>
+<script>
+     
+
+
+
+     function registertel(){
+        // 手机号失去焦点
+        $('#userMobile').blur(function(){
+            reg=/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[06-8])\d{8}$/;//验证手机正则(输入前7位至11位)  
+            var that = $(this);
+          
+            if( that.val()==""|| that.val()=="请输入您的手机号")  
+            {   
+                layer.msg('请输入您的手机号！');
+            }  
+            else if(that.val().length<11)  
+            {     
+                layer.msg('您输入的手机号长度有误！'); 
+            }  
+            else if(!reg.test($("#userMobile").val()))  
+            {   
+                layer.msg('您输入的手机号不存在!'); 
+            }  
+            else if(that.val().length == 11){
+                // ajax请求后台数据
+            }
+        })
+        // 密码失去焦点
+        $('#verifcode').blur(function(){
+            // reg=/^[0-9]{6,16}$/;
+            var that = $(this);
+            if( that.val()==""|| that.val()=="请输入验证码")  
+            {   
+                layer.msg('请输入验证码！');
+            }
+        })
+
+    }
+        registertel();
+    //
+
+
+
+    // 倒计时
+    var InterValObj; //timer变量，控制时间
+    var count = 60; //间隔函数，1秒执行
+    var curCount;//当前剩余秒数
+
+    function sendMessage() {
+      　curCount = count;
+
+    　　//设置button效果，开始计时
+         $("#btn").attr("disabled", "true");
+         $("#btn").text("剩余"+curCount + "秒");
+         InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+    　　  //向后台发送处理数据
+        //  $.ajax({
+        //  　　type: "POST", //用POST方式传输
+        //  　　dataType: "text", //数据格式:JSON
+        //  　　//url: 'Login.ashx', //目标地址
+        // 　　 //data: "dealType=" + dealType +"&uid=" + uid + "&code=" + code,
+        // 　　 error: function (XMLHttpRequest, textStatus, errorThrown) { },
+        //  　　success: function (msg){ }
+        //  });
+    }
+
+    //timer处理函数
+    function SetRemainTime() {
+        if (curCount == 0) {                
+            window.clearInterval(InterValObj);//停止计时器
+            $("#btn").removeAttr("disabled");//启用按钮
+            $("#btn").text("再次发送");
+        }
+        else {
+            curCount--;
+            $("#btn").text("剩余"+curCount + "秒");
+        }
+    }
+
+    // 发送验证码
+    $('.sendcode').click(function(){
+        var that = $(this);
+        if($('#userMobile').val()==''){
+            layer.msg('请输入您的手机号！');
+        }else{
+            // ajax请求数据库是否有手机号
+            sendMessage();   
+        }
+        
+    })
+</script>
+</body>
+</html>

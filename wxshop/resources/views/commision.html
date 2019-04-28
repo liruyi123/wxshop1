@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <title>佣金明细</title>
+    <meta content="app-id=984819816" name="apple-itunes-app" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no, maximum-scale=1.0" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <link rel="stylesheet" href="css/sm.css">
+    <link href="css/comm.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/accountdetail.css">
+    <!-- SUI mobile -->
+   
+    
+</head>
+<body>
+    
+<!--触屏版内页头部-->
+<div class="m-block-header" id="div-header">
+    <strong id="m-title">佣金明细</strong>
+    <a href="javascript:history.back();" class="m-back-arrow"><i class="m-public-icon"></i></a>
+    <a href="/" class="m-index-icon"><i class="m-public-icon"></i></a>
+</div>
+<div class="total-money">
+	<p class="m-title">￥0.14</p>
+	<p>佣金累积到一定额度可消费或者提现。</p>
+</div>
+<div class="listtab clearfix">
+	<a href="javascript:;" class="current">佣金收入</a>
+	<a href="javascript:;" class="">佣金转银行卡</a>
+</div>
+<div class="a-detail">
+	<div class="detail-items">
+		<ul class="clearfix">
+			<li class="consume">
+				<a href="" class="items-con clearfix">
+					<div class="fl">
+						<p class="account-sort">消费</p>
+						<p>2017-06-30 11:11:17</p>
+					</div>
+					<div class="fr price">
+						<p>-5:00</p>
+					</div>
+				</a>
+			</li>
+			<li class="income">
+				<a href="" class="items-con clearfix">
+					<div class="fl">
+						<p class="account-sort">USER.10033507073</p>
+						<p>2017-06-30 11:11:17</p>
+					</div>
+					<div class="fr price">
+						<p>+5:00</p>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="default" style="display: none">
+		<s></s>
+		暂无结果信息，请稍后再试哦~
+	</div>
+</div>
+<div class="transfer" style="display: none">
+	<div class="detail-items">
+		<ul class="clearfix">
+			<li class="consume">
+				<a href="" class="items-con clearfix">
+					<div class="fl">
+						<p class="account-sort">提现</p>
+						<p>2017-06-30 11:11:17</p>
+					</div>
+					<div class="fr price">
+						<p>-5:00</p>
+					</div>
+				</a>
+			</li>
+			<li class="income">
+				<a href="" class="items-con clearfix">
+					<div class="fl">
+						<p class="account-sort">提现</p>
+						<p>2017-06-30 11:11:17</p>
+					</div>
+					<div class="fr price">
+						<p>+5:00</p>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="default" style="display: none">
+		<s></s>
+		暂无结果信息，请稍后再试哦~
+	</div>
+</div>
+<div class="footer clearfix">
+    <ul class="clearfix">
+        <li class="f_home"><a href="javascript:;" >提现申请</a></li>
+        <li class="f_announced"><a href="" >邀请有奖</a></li>
+    </ul>
+</div>
+
+
+<script src="js/zepto.js" charset="utf-8"></script>
+<script src="js/sm.js"></script>
+<script src="js/sm-extend.js"></script>
+<script>
+	 // $('.listtab a').click(function(){
+  //       $(this).addClass('current').siblings('a').removeClass('current');
+  //       console.log($('.a-detail').css('display'));
+  //       if($('.a-detail').css('display')=='block'){
+  //           $('.a-detail').css('display','none');
+  //           $('.transfer').css('display','block');
+  //       }else{
+  //           $('.a-detail').css('display','block');
+  //           $('.transfer').css('display','none');
+  //       }
+  //   })
+
+
+	 // 提现
+	 $(document).on('click','.f_home a', function () {
+	      var buttons1 = [
+	        {
+	          text: '提现到银行卡',
+	          bold: true,
+	          bg: 'danger',
+	          onClick: function() {
+	            $.alert("提现到银行卡");
+	          }
+	        }
+	      ];
+	      var buttons2 = [
+	        {
+	          text: '取消',
+	          color: 'danger'
+	        }
+	      ];
+	      var groups = [buttons1, buttons2];
+	      $.actions(groups);
+	  });
+
+</script>
+<!-- <script src="js/jquery-1.11.2.min.js"></script> -->
+</body>
+</html>
